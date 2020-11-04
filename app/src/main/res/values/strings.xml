@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BMI</string>
+    <string name="bmi_desc">Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women.</string>
+    <string name = "calculate">Calculate</string>
+    <string name="reset">Reset</string>
+    <string name="underweight">Underweight</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Overweight</string>
+    <string name="hint_weight">Enter weight (kg)</string>
+    <string name="hint_height">Enter height (cm)</string>
+</resources>
