@@ -1,5 +1,6 @@
 package my.edu.tarc.bmi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -34,16 +35,22 @@ class MainActivity : AppCompatActivity() {
         editTextHeight = findViewById(R.id.editTextHeight)
         textViewBMI = findViewById(R.id.textViewBMI)
         imageViewBMI = findViewById(R.id.imageViewBMI)
+        val imageViewMoreInfo: ImageView = findViewById(R.id.imageViewMoreInfo)
+
+        imageViewMoreInfo.setOnClickListener {
+            val intent = Intent(this, InfoActivity::class.java)
+            startActivity(intent)
+        }
 
         val buttonCalculate : Button = findViewById(R.id.buttonCalculate)
         buttonCalculate.setOnClickListener {
             //To retrieve value from a View
-            val weight : Float = editTextWeight.text.toString().toDouble()
-            val height : Float = editTextHeight.text.toString() .toDouble()
+            val weight : Double = editTextWeight.text.toString().toDouble()
+            val height : Double = editTextHeight.text.toString().toDouble()
 
             //BMI = kg/m pow 2
             var bmi = weight/(height/100).pow(2)
-            val bmi = weight / Math.pow(height/100, 2.0)
+            //val bmi = weight / Math.pow(height/100, 2.0)
 
 
             //TODO : Determine the status of BMI and present the result to the user
@@ -54,30 +61,33 @@ class MainActivity : AppCompatActivity() {
             if(bmi <= 18.5)
             {
                 imageViewBMI.setImageResource(R.drawable.under)
+                textViewBMI.text = String.format("%1.2f, %s", bmi, getString(R.string.underweight))
             }
-            else if (bmi > 18.5 || bmi < 24.9)
+            else if (bmi > 18.5 && bmi < 24.9)
             {
                 imageViewBMI.setImageResource(R.drawable.normal)
+                textViewBMI.text = String.format("%1.2f, %s", bmi, getString(R.string.normal))
             }
             else if (bmi >= 25)
             {
                 imageViewBMI.setImageResource(R.drawable.over)
+                textViewBMI.text = String.format("%1.2f, %s", bmi, getString(R.string.overweight))
             }
-
-            textViewBMI.text = bmi.toString()
+            
 
         }//end of onCLickListener
 
         val buttonReset : Button = findViewById(R.id.buttonReset)
         buttonReset.setOnClickListener {
-            textViewBMI.text =" "
+            textViewBMI.text = "BMI"
             editTextWeight.text = null
             editTextHeight.text = null
             //or we can put editTextHeight.text = clear()
             imageViewBMI.setImageResource(R.drawable.empty)
         }
 
-        
+
+
 
     }//end of function
 }//end of class
